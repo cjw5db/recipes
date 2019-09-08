@@ -1,3 +1,6 @@
+
+const port = 8000;
+
 var express = require('express');
 var http = require('http');
 
@@ -8,8 +11,6 @@ app.use(express.urlencoded({ extended: false }));
 
 //var appRouter = require('./models/routes');
 //app.use(appRouter);
-
-const port = 3002;
 
 var server = http.createServer(app);
 

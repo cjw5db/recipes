@@ -6,7 +6,7 @@ var router = express.Router();
 /* GET home page. */
 //router.get('/', middleware.test, middleware.sync, function(req, res) {
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'express' });
 });
 
 module.exports = router;

@@ -1,0 +1,45 @@
+version: '3'
+services:
+
+  models:
+    build: ./models
+    container_name: models
+    volumes:
+      - ./models:/home/node/app/src
+    ports:
+      - "8002:8000"
+    networks:
+      - backend
+    command: npm start 
+
+  exp:
+    build: ./exp
+    container_name: exp
+    volumes:
+      - ./exp:/home/node/app/src
+    ports:
+      - "8001:8000"
+    depends_on:
+      - models
+    networks:
+      - backend
+      - frontend
+    command: npm start 
+
+  web:
+    build: ./web
+    container_name: web
+    volumes:
+      - ./web:/home/node/app/src
+    ports:
+      - "8000:8000"
+    depends_on:
+      - exp
+    networks:
+      - frontend
+    command: npm start 
+
+
+networks:
+  backend:
+  frontend:

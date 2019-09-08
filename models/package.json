@@ -2,13 +2,17 @@
   "name": "models",
   "version": "1.0.0",
   "description": "",
-  "main": "models.js",
+  "main": "src/models.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/models.js"
   },
-  "author": "",
+  "author": "Conner Ward",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2"
   }
 }

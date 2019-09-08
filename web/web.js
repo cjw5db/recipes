@@ -1,3 +1,6 @@
+
+const port = 8000;
+
 var express = require('express');
 var path = require('path');
 var http = require('http');
@@ -16,7 +19,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 var appRouter = require('./web/routes');
 app.use(appRouter);
 
-const port = 3000;
 
 var server = http.createServer(app);
 
