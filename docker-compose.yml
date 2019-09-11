@@ -1,5 +1,18 @@
 version: '3'
+
 services:
+
+  db:
+    image: couchdb
+    container_name: db
+    env_file:
+      - ./db/db_variables.env
+    volumes:
+      - ./db/data:/opt/couchdb/data
+    ports:
+      - "5984:5984"
+    networks:
+      - third
 
   models:
     build: ./models
@@ -8,8 +21,11 @@ services:
       - ./models:/home/node/app/src
     ports:
       - "8002:8000"
+    depends_on:
+      - db
     networks:
-      - backend
+      - second
+      - third
     command: npm start 
 
   exp:
@@ -22,8 +38,8 @@ services:
     depends_on:
       - models
     networks:
-      - backend
-      - frontend
+      - first
+      - second 
     command: npm start 
 
   web:
@@ -36,10 +52,11 @@ services:
     depends_on:
       - exp
     networks:
-      - frontend
+      - first 
     command: npm start 
 
 
 networks:
-  backend:
-  frontend:
+  first:
+  second:
+  third:
