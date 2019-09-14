@@ -19,7 +19,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 var appRouter = require('./web/routes');
 app.use(appRouter);
 
-
 var server = http.createServer(app);
 
 server.listen(port, () => console.log(`web listening on port ${port}`));
