@@ -8,16 +8,12 @@ module.exports = {
   sanity: function(req, res){
 
     console.log('sanity test');
-
-    var options = {
+    
+    request({
       url: test_url + '/sanity',
       method: 'GET',
       simple: true,
-    }
-    
-    request(
-      options
-    ).then(function() {
+    }).then(function() {
       console.log('success');
       res.status(200).end();
     }).catch(function() {

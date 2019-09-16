@@ -9,15 +9,11 @@ module.exports = {
 
     console.log('sanity test');
 
-    var options = {
+    request({
       url: test_url + '/sanity',
       method: 'GET',
       simple: true,
-    }
-
-    request(
-      options
-    ).then(function(body) {
+    }).then(function(body) {
       console.log('success');
       res.render('test', { name: 'sanity', result: 'success' });
     }).catch(function(err) {

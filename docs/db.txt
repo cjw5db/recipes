@@ -1,0 +1,51 @@
+
+validation required for everything dealing with remote db:
+  login
+  sync/replication
+
+local should only have stuff that allows local db work
+
+On first connection:
+  login
+  get authenticator
+
+On reconnection:
+  check validity of auth (revalidate if necessary)
+  sync shared (always require validation to sync) 
+
+CouchDB remote:
+
+  Databases:
+    Users
+      email::pk
+      pwd
+      groups[]
+
+    Authenticators
+
+    Group_Meta
+      uuid::pk
+      name
+      users[]::email
+
+    Discover_Recipes
+
+PouchDB local:
+
+  localStorage:
+    My_Groups: group_meta documents
+
+  Cookies:
+    auth::no expiration (sent with every request)
+    
+PouchDB local/CouchDB remote:
+  Databases:
+
+    1 per Group: (db name is uuid from group_meta document)
+      documents are lists: 
+        specifier of recipe vs. grocery_list
+        items[]
+  
+
+    
+Have to be able to create unique database per group

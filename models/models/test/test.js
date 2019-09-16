@@ -1,6 +1,6 @@
 var request = require('request-promise');
 
-var db_url = 'http://db:5984';
+var db_url = 'http://couchdb:5984';
 var test_url = db_url + '/test';
 
 module.exports = {
@@ -9,15 +9,11 @@ module.exports = {
 
     console.log('sanity test');
 
-    var options = {
+    request({
       url: db_url,
       method: 'GET',
       simple: true,
-    }
-
-    request(
-      options
-    ).then(function() {
+    }).then(function() {
       console.log('success');
       res.status(200).end();
     }).catch(function() {
