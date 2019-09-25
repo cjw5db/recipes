@@ -2,18 +2,6 @@ version: '3'
 
 services:
 
-  mysql:
-    image: mysql
-    container_name: mysql
-    env_file:
-      - ./mysql/mysql_variables.env
-    volumes:
-      - ./mysql/data:/var/lib/mysql
-    ports:
-      - "3306:3306"
-    networks:
-      - third
-
   couchdb:
     image: couchdb
     container_name: couchdb
@@ -34,7 +22,6 @@ services:
     ports:
       - "8002:8000"
     depends_on:
-      - mysql
       - couchdb
     networks:
       - second

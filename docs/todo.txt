@@ -1,0 +1,1 @@
+return next(err) does not cut off rest of promise chain as expected

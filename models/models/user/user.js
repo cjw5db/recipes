@@ -16,7 +16,6 @@ module.exports = {
         "name": req.body.name, 
         "password": req.body.password, 
         "type": "user",
-        "groups": [],
         "roles": [],
       },
       json: true,
