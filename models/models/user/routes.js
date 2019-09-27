@@ -7,4 +7,6 @@ var user = require('./user');
 
 router.post('/create', user.create);
 
+router.post('/authenticate', user.authenticate);
+
 module.exports = router;

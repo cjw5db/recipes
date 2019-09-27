@@ -8,3 +8,8 @@ html
     block content
       nav(class='navbar navbar-light bg-light')
         a(class='navbar brand', href='/') Recipe App 
+
+      if (locals.authenticated)
+        p logged in! 
+      else
+        p not logged in

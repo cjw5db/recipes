@@ -3,8 +3,10 @@ var router = express.Router();
 
 router.use(express.json());
 
-var mw = require('./user');
+var user = require('./user');
 
-router.post('/create', mw.create);
+router.post('/signup', user.signup);
+
+router.post('/signin', user.signin);
 
 module.exports = router;

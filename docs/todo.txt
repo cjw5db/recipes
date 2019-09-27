@@ -7,3 +7,7 @@ SOLUTION:
   inside a promise chain though, it is only returning from a current promise and not the actual middleware
   therefore, need to throw an error that is then caught, where the proceeding return next(err) is included
 
+ISSUE:
+  make it so that all incoming responses at the web layer from the experience layer
+  pass along any set-cookie headers to the web's response at the end of the 
+  request-response cycle

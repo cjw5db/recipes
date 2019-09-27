@@ -2,10 +2,10 @@
 extends ../layout
 
 block content
-  h1=signup 
+  h1=signup_form
   p Welcome to signup
   br
-  form(action="/user/create" method="POST")
+  form(action="/user/signup" method="POST")
     p Username 
       input(type="text" name="name")
     p Password

@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
+var all = require('./all');
+router.all('*', all.authenticated);
+
 var indexRouter = require('./index/routes');
 router.use('/', indexRouter);
 

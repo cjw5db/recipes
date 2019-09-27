@@ -8,6 +8,12 @@ block append content
   br
   a(href="/test/sanity") sanity test
   br
-  a(href="/user/signup") sign up
+  a(href="/user/signup_form") sign up
   br
-
+  h2 signin
+  form(action="/user/signin" method="POST")
+    p Username 
+      input(type="text" name="name")
+    p Password
+      input(type="password" name="password")
+    input(type="submit" value="Submit")
