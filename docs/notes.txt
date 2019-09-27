@@ -1,0 +1,9 @@
+
+couchdb documents are stored in b-trees, which are ordered
+therefore, requesting uuids from couchdb is not particularly efficient for data stored near each other
+need to find a more efficient way of setting uuids 
+
+consider adding a revision history to deal with merge conflicts for group documents
+Event Sourcing with a steadily moving up ground truth
+think about how merging and conflicts should be handled for recipes in general
+

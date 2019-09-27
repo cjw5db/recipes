@@ -1,1 +1,9 @@
-return next(err) does not cut off rest of promise chain as expected
+
+ISSUE:
+  return next(err) does not cut off rest of promise chain as expected
+SOLUTION:
+  next adds middleware to the stack, it does not interrupt middleware
+  return next(err) works when it is outside a promise chain as it is ending its current middleware function
+  inside a promise chain though, it is only returning from a current promise and not the actual middleware
+  therefore, need to throw an error that is then caught, where the proceeding return next(err) is included
+

@@ -9,6 +9,7 @@ services:
       - ./couchdb/couchdb_variables.env
     volumes:
       - ./couchdb/data:/opt/couchdb/data
+      - ./couchdb/etc:/opt/couchdb/etc/local.d
     ports:
       - "5984:5984"
     networks:

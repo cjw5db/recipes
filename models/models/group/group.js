@@ -57,28 +57,28 @@ function add_user(req, res, next){
   const user_id = req.body.user_id;
   const owner_id = req.body.owner_id;
 
+  if(owner_id == user_id){
+    return next('user and owner cannot be the same');
+  }
+
+  const view_key = JSON.stringify([owner_id,0]);
+
   request({
     url: all_views_url + 'user-groups/',
     method: 'GET',
     qs: {
-      "key": [
-        owner_id, 
-        0
-      ],
+      "key": view_key,
     },
     simple: true,
     json: true,
   }).then(function(body){
-    if(body.total_rows == 0){
-      return next('user not found');
-    }
 
     var row = body.rows.find(function(dict){
       return (dict.id == group_id);
     });
 
     if(row == undefined){
-      return next('user is not owner of this group');
+      throw new Error('user is not owner of this group'); 
     }
 
     return request({
@@ -96,7 +96,7 @@ function add_user(req, res, next){
   }).then(function(body){
 
     if(body.users.includes(user_id)){
-      return next('user already in group');
+      throw new Error('user already in group');
     }
 
     body.users.push(user_id);
