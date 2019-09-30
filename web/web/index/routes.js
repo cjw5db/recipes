@@ -1,12 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-//var middleware = require('./route_middleware/test_middleware');
+var index = require('./index');
 
-/* GET home page. */
-//router.get('/', middleware.test, middleware.sync, function(req, res) {
-router.get('/', function(req, res) {
-  res.render('index', { title: 'express' });
+router.get('/', index.index, function(req, res) {
+  
+  res.locals.title = 'index';
+  console.log(res.locals);
+  res.render('index', res.locals);
 });
 
 module.exports = router;

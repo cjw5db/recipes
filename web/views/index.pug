@@ -6,6 +6,13 @@ block append content
   h1= title
   p Welcome to #{title}
   br
+
+  if (locals.name)
+    p Hello #{name} 
+  else
+    p Sorry
+
+  br
   a(href="/test/sanity") sanity test
   br
   a(href="/user/signup_form") sign up

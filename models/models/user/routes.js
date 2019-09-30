@@ -7,6 +7,6 @@ var user = require('./user');
 
 router.post('/create', user.create);
 
-router.post('/authenticate', user.authenticate);
+router.get('/:user/list_groups', user.list_groups);
 
 module.exports = router;

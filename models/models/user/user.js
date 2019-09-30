@@ -1,10 +1,11 @@
 
 var request = require('request-promise');
 
-var db_url = 'http://couchdb:5984';
+var db_url = 'http://couchdb:5984/';
 
-var user_url = db_url + '/_users/org.couchdb.user:';
-var session_url = db_url + '/_session';
+const user_url = db_url + '_users/org.couchdb.user:';
+const group_url = db_url + 'groups/';
+const group_views_url = group_url + '_design/all/_view/';
 
 function create(req, res, next){
 
@@ -33,40 +34,49 @@ function create(req, res, next){
   });
 }
 
-
-function authenticate(req, res, next){
+function list_groups(req, res, next){
   
-  if (!(req.body.name && req.body.password)){
-    return next('missing required fields');
+  console.log(req.params);
+
+  if(!(req.params.user)){
+    return next('missing required data');
   }
-  
-  const name = req.body.name;
-  const password = req.body.password;
 
+  const name = req.params.user;
+
+  const view_start_key = JSON.stringify([name, 0]);
+  const view_end_key = JSON.stringify([name, 1]);
 
   request({
-    method: 'POST',
-    url: session_url,
-    form: {
-      "name": name,
-      "password": password,
+    method: 'GET',
+    url: group_views_url + 'user-groups/',
+    qs: {
+      "startkey": view_start_key,
+      "endkey": view_end_key,
+      "include_docs": true,
     },
     simple: true,
     json: true,
-    resolveWithFullResponse: true,
-  }).then(function(response){
-    res.status(200).json({'cookie': response.headers['set-cookie'][0]});
+  }).then(function(body){
+    console.log(body);
+
+    var data = []
+
+    for(let row of body.rows){
+      data.push(row.doc);
+    }
+
+    res.status(200).send(data);
   }).catch(function(err){
     return next(err);
-  });
+  })
 }
-
 
 module.exports = {
 
   create: create, 
 
-  authenticate: authenticate,
+  list_groups: list_groups,
 
 }
 

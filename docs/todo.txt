@@ -11,3 +11,4 @@ ISSUE:
   make it so that all incoming responses at the web layer from the experience layer
   pass along any set-cookie headers to the web's response at the end of the 
   request-response cycle
+UNSOLVABLE NOR NECESSARY
